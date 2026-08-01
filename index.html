@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
@@ -372,20 +372,110 @@
     }
 
     .prize-row {
-      align-items: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
       display: grid;
-      gap: 8px;
-      grid-template-columns: minmax(0, 1.4fr) 92px 42px;
-      margin-bottom: 8px;
+      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) 42px;
+      margin-bottom: 12px;
+      padding: 14px;
+    }
+
+    .prize-fields {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1.5fr) 92px;
+    }
+
+    .sponsor-fields {
+      display: grid;
+      gap: 10px;
+      grid-column: 1 / -1;
+      grid-template-columns: minmax(160px, 0.65fr) minmax(220px, 1.35fr);
+    }
+
+    .field {
+      color: #475467;
+      display: grid;
+      font-size: 0.8rem;
+      font-weight: 700;
+      gap: 5px;
     }
 
     .prize-row input {
       background: #fff;
       border: 1px solid var(--line);
-      border-radius: 10px;
+      border-radius: 8px;
+      color: var(--ink);
       min-width: 0;
       padding: 10px 11px;
       width: 100%;
+    }
+
+    .prize-row input:focus {
+      border-color: var(--bni);
+      box-shadow: 0 0 0 3px rgba(207, 49, 72, 0.12);
+      outline: none;
+    }
+
+    .sponsor-media {
+      align-items: center;
+      border-top: 1px solid #edf0f4;
+      display: flex;
+      gap: 10px;
+      grid-column: 1 / -1;
+      padding-top: 12px;
+    }
+
+    .sponsor-preview {
+      align-items: center;
+      background: #f5f7fa;
+      border: 1px dashed #cfd5df;
+      border-radius: 8px;
+      color: #667085;
+      display: flex;
+      flex: 0 0 58px;
+      font-size: 0.72rem;
+      height: 58px;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+      width: 58px;
+    }
+
+    .sponsor-preview img {
+      height: 100%;
+      object-fit: contain;
+      width: 100%;
+    }
+
+    .image-actions {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .image-note {
+      color: #667085;
+      flex-basis: 100%;
+      font-size: 0.75rem;
+    }
+
+    .mini-btn {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: #344054;
+      font-weight: 700;
+      min-height: 36px;
+      padding: 7px 10px;
+    }
+
+    .mini-btn:hover {
+      border-color: var(--bni);
+      color: var(--bni);
     }
 
     .icon-btn {
@@ -419,29 +509,71 @@
       background: #fffdf8;
       border-radius: 14px;
       box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
-      max-width: 520px;
+      max-width: 640px;
       overflow: hidden;
       text-align: center;
-      width: min(100%, 520px);
+      width: min(100%, 640px);
+    }
+
+    .modal-backdrop.show .modal {
+      animation: prizeReveal 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
     .modal-art {
+      align-items: center;
       background:
         radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.72), transparent 32%),
         linear-gradient(135deg, #dbe8ff, #fff0f6 58%, #fff7d6);
+      display: flex;
+      height: 240px;
+      justify-content: center;
       overflow: hidden;
-      padding: 44px 22px 30px;
+      padding: 18px 22px;
       position: relative;
     }
 
     .modal-art .chest-shape {
-      height: 180px;
+      height: 150px;
       margin: 0 auto;
-      width: 230px;
+      width: 200px;
+    }
+
+    .modal-art.has-sponsor-photo .chest-shape {
+      animation: chestFade 760ms ease-in-out both;
+      position: absolute;
+      z-index: 2;
+    }
+
+    .modal-sponsor-hero {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      box-shadow: 0 12px 30px rgba(39, 49, 66, 0.16);
+      display: flex;
+      height: 204px;
+      justify-content: center;
+      max-width: 430px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .modal-sponsor-hero[hidden] {
+      display: none;
+    }
+
+    .modal-art.has-sponsor-photo .modal-sponsor-hero {
+      animation: sponsorHeroReveal 620ms 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    .modal-sponsor-hero img {
+      height: 100%;
+      object-fit: contain;
+      width: 100%;
     }
 
     .modal-body {
-      padding: 24px;
+      padding: 22px 26px 26px;
     }
 
     .modal h2 {
@@ -465,6 +597,88 @@
       line-height: 1.45;
       margin-bottom: 18px;
       padding: 16px;
+    }
+
+    .sponsor-thanks {
+      background: #fff;
+      border: 1px solid #ead9dc;
+      border-left: 5px solid var(--bni);
+      border-radius: 10px;
+      margin: 0 0 20px;
+      padding: 16px 18px;
+      text-align: left;
+    }
+
+    .sponsor-thanks[hidden] {
+      display: none;
+    }
+
+    .sponsor-eyebrow {
+      color: var(--bni);
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.45;
+      margin-bottom: 7px;
+      text-align: center;
+    }
+
+    .sponsor-name {
+      color: var(--ink);
+      font-size: 1.4rem;
+      font-weight: 900;
+      line-height: 1.35;
+      margin-bottom: 7px;
+      text-align: center;
+    }
+
+    .sponsor-message {
+      color: #475467;
+      font-size: 0.92rem;
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    .record-sponsor {
+      color: var(--bni);
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    @keyframes prizeReveal {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes chestFade {
+      0%,
+      45% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.82);
+        visibility: hidden;
+      }
+    }
+
+    @keyframes sponsorHeroReveal {
+      from {
+        opacity: 0;
+        transform: scale(0.94);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     .toast {
@@ -551,8 +765,29 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .prize-row {
-        grid-template-columns: minmax(0, 1fr) 74px 42px;
+      .prize-fields,
+      .sponsor-fields {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-art {
+        height: 210px;
+      }
+
+      .modal-sponsor-hero {
+        height: 176px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .modal-backdrop.show .modal,
+      .modal-art.has-sponsor-photo .chest-shape,
+      .modal-art.has-sponsor-photo .modal-sponsor-hero {
+        animation: none;
+      }
+
+      .modal-art.has-sponsor-photo .chest-shape {
+        display: none;
       }
     }
   </style>
@@ -586,7 +821,7 @@
     <section class="admin" id="adminView">
       <section class="admin-panel">
         <h2>寶箱內容設定</h2>
-        <p>可設定獎項與數量。按下「補新一輪寶箱」後，會依照目前設定產生新的寶箱。</p>
+        <p>可設定獎項、贊助者、感謝話語與照片。按下「補新一輪寶箱」後，會依照目前設定產生新的寶箱。</p>
         <div class="toolbar">
           <button class="btn secondary" id="generalPresetButton" type="button">套用目前獎品預設</button>
           <button class="btn" id="saveConfigButton" type="button">儲存設定</button>
@@ -606,13 +841,20 @@
 
   <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
-      <div class="modal-art">
+      <div class="modal-art" id="modalArt">
         <div class="chest-shape"></div>
+        <div class="modal-sponsor-hero" id="modalSponsorPhoto" hidden></div>
       </div>
       <div class="modal-body">
         <h2 id="modalTitle">恭喜開出</h2>
         <div class="prize-name" id="modalPrize"></div>
-        <p>已記錄到右側開箱紀錄。</p>
+        <section class="sponsor-thanks" id="modalSponsor" hidden>
+          <div>
+            <div class="sponsor-eyebrow">本次好禮由熱情贊助</div>
+            <div class="sponsor-name" id="modalSponsorName"></div>
+            <div class="sponsor-message" id="modalSponsorMessage"></div>
+          </div>
+        </section>
         <button class="btn secondary" id="closeModalButton" type="button">完成</button>
       </div>
     </div>
@@ -621,7 +863,7 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    const STORAGE_KEY = "summerTreasureSimple.v1";
+    const STORAGE_KEY = "summerTreasureSponsor.v1";
     const tier = {
       id: "gold",
       name: "寶箱",
@@ -662,7 +904,12 @@
       adminRecords: document.getElementById("adminRecords"),
       configEditor: document.getElementById("configEditor"),
       modalBackdrop: document.getElementById("modalBackdrop"),
+      modalArt: document.getElementById("modalArt"),
       modalPrize: document.getElementById("modalPrize"),
+      modalSponsor: document.getElementById("modalSponsor"),
+      modalSponsorPhoto: document.getElementById("modalSponsorPhoto"),
+      modalSponsorName: document.getElementById("modalSponsorName"),
+      modalSponsorMessage: document.getElementById("modalSponsorMessage"),
       closeModalButton: document.getElementById("closeModalButton"),
       toast: document.getElementById("toast")
     };
@@ -688,10 +935,11 @@
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
+          const config = normalizeConfig(parsed.config || defaultPrizes);
           return {
-            config: normalizeConfig(parsed.config || defaultPrizes),
-            boxes: Array.isArray(parsed.boxes) ? parsed.boxes : generateBoxes(normalizeConfig(parsed.config || defaultPrizes)),
-            records: Array.isArray(parsed.records) ? parsed.records : [],
+            config,
+            boxes: Array.isArray(parsed.boxes) ? parsed.boxes.map(normalizeBox) : generateBoxes(config),
+            records: Array.isArray(parsed.records) ? parsed.records.map(normalizeRecord) : [],
             updatedAt: parsed.updatedAt || new Date().toISOString()
           };
         } catch (error) {
@@ -716,7 +964,10 @@
     function normalizeConfig(source) {
       return (source || []).map(item => ({
         label: item.label || item[0] || "",
-        quantity: Number(item.quantity ?? item[1] ?? 1)
+        quantity: Number(item.quantity ?? item[1] ?? 1),
+        sponsorName: item.sponsorName || "",
+        sponsorMessage: item.sponsorMessage || "",
+        sponsorImage: item.sponsorImage || ""
       })).filter(item => item.label.trim() && item.quantity > 0);
     }
 
@@ -724,16 +975,41 @@
       const prizes = [];
       config.forEach(item => {
         for (let index = 0; index < Number(item.quantity); index += 1) {
-          prizes.push(item.label);
+          prizes.push({
+            prize: item.label,
+            sponsorName: item.sponsorName,
+            sponsorMessage: item.sponsorMessage,
+            sponsorImage: item.sponsorImage
+          });
         }
       });
-      return shuffle(prizes).map((prize, index) => ({
+      return shuffle(prizes).map((item, index) => ({
         id: `${tier.id}-${Date.now()}-${index}`,
         number: index + 1,
-        prize,
+        ...item,
         opened: false,
         openedAt: null
       }));
+    }
+
+    function normalizeBox(box) {
+      return {
+        ...box,
+        prize: box.prize || "",
+        sponsorName: box.sponsorName || "",
+        sponsorMessage: box.sponsorMessage || "",
+        sponsorImage: box.sponsorImage || ""
+      };
+    }
+
+    function normalizeRecord(record) {
+      return {
+        ...record,
+        prize: record.prize || "",
+        sponsorName: record.sponsorName || "",
+        sponsorMessage: record.sponsorMessage || "",
+        sponsorImage: record.sponsorImage || ""
+      };
     }
 
     function shuffle(items) {
@@ -790,17 +1066,36 @@
       state.records.unshift({
         id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
         prize: box.prize,
+        sponsorName: box.sponsorName,
+        sponsorMessage: box.sponsorMessage,
         boxNumber: box.number,
         openedAt: box.openedAt
       });
       state.records = state.records.slice(0, 160);
       saveState();
-      showModal(box.prize);
+      showModal(box);
       renderAll();
     }
 
-    function showModal(prize) {
-      elements.modalPrize.textContent = prize;
+    function showModal(box) {
+      const sponsorName = box.sponsorName.trim();
+      const sponsorMessage = box.sponsorMessage.trim() || (sponsorName ? `感謝 ${sponsorName} 一起為磐石分會帶來更多連結與驚喜！` : "");
+
+      elements.modalPrize.textContent = box.prize;
+      elements.modalSponsor.hidden = !sponsorName;
+      elements.modalSponsorName.textContent = sponsorName;
+      elements.modalSponsorMessage.textContent = sponsorMessage;
+      elements.modalSponsorPhoto.innerHTML = "";
+      elements.modalSponsorPhoto.hidden = !box.sponsorImage;
+      elements.modalArt.classList.remove("has-sponsor-photo");
+      if (box.sponsorImage) {
+        const image = document.createElement("img");
+        image.src = box.sponsorImage;
+        image.alt = `${sponsorName} 贊助照片`;
+        elements.modalSponsorPhoto.appendChild(image);
+        void elements.modalArt.offsetWidth;
+        elements.modalArt.classList.add("has-sponsor-photo");
+      }
       elements.modalBackdrop.classList.add("show");
     }
 
@@ -819,6 +1114,7 @@
       const time = Number.isNaN(date.getTime()) ? "" : date.toLocaleString("zh-TW", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
       return `<div class="record">
         <b>${escapeHtml(record.prize)}</b>
+        ${record.sponsorName ? `<span class="record-sponsor">贊助者：${escapeHtml(record.sponsorName)}</span>` : ""}
         <small>寶箱 ${Number(record.boxNumber) || ""}${time ? `｜${time}` : ""}</small>
       </div>`;
     }
@@ -835,30 +1131,124 @@
       </section>`;
 
       elements.configEditor.querySelector("[data-add-row]").addEventListener("click", () => {
-        elements.configEditor.querySelector(".prize-rows").insertAdjacentHTML("beforeend", renderPrizeRow({ label: "", quantity: 1 }));
-        bindRemoveButtons();
+        elements.configEditor.querySelector(".prize-rows").insertAdjacentHTML("beforeend", renderPrizeRow({
+          label: "",
+          quantity: 1,
+          sponsorName: "",
+          sponsorMessage: "",
+          sponsorImage: ""
+        }));
+        bindPrizeRows();
       });
-      bindRemoveButtons();
+      bindPrizeRows();
     }
 
-    function bindRemoveButtons() {
-      elements.configEditor.querySelectorAll("[data-remove-row]").forEach(button => {
-        button.addEventListener("click", () => button.closest(".prize-row").remove());
+    function bindPrizeRows() {
+      elements.configEditor.querySelectorAll(".prize-row:not([data-bound])").forEach(row => {
+        row.dataset.bound = "true";
+        row.querySelector("[data-remove-row]").addEventListener("click", () => row.remove());
+        const fileInput = row.querySelector("[data-sponsor-file]");
+        row.querySelector("[data-upload-image]").addEventListener("click", () => fileInput.click());
+        row.querySelector("[data-clear-image]").addEventListener("click", () => {
+          row.dataset.sponsorImage = "";
+          updateSponsorPreview(row);
+        });
+        fileInput.addEventListener("change", async () => {
+          const file = fileInput.files && fileInput.files[0];
+          if (!file) return;
+          if (!file.type.startsWith("image/")) {
+            showToast("請選擇圖片檔案。");
+            return;
+          }
+          try {
+            row.dataset.sponsorImage = await compressSponsorImage(file);
+            updateSponsorPreview(row);
+            showToast("贊助照片已加入，請記得儲存設定。");
+          } catch (error) {
+            console.warn("Sponsor image could not be processed.", error);
+            showToast("照片處理失敗，請換一張再試。");
+          } finally {
+            fileInput.value = "";
+          }
+        });
       });
     }
 
     function renderPrizeRow(row) {
-      return `<div class="prize-row">
-        <input data-prize-label value="${escapeAttribute(row.label)}" placeholder="獎項內容">
-        <input data-prize-quantity type="number" min="1" step="1" value="${Number(row.quantity) || 1}" aria-label="數量">
+      const sponsorImage = row.sponsorImage || "";
+      return `<div class="prize-row" data-sponsor-image="${escapeAttribute(sponsorImage)}">
+        <div>
+          <div class="prize-fields">
+            <label class="field">獎品名稱
+              <input data-prize-label value="${escapeAttribute(row.label)}" placeholder="例如：咖啡兌換券一張">
+            </label>
+            <label class="field">數量
+              <input data-prize-quantity type="number" min="1" step="1" value="${Number(row.quantity) || 1}">
+            </label>
+          </div>
+          <div class="sponsor-fields">
+            <label class="field">贊助者／品牌
+              <input data-sponsor-name value="${escapeAttribute(row.sponsorName || "")}" placeholder="例如：聿哲／黑宿咖啡">
+            </label>
+            <label class="field">感謝話語
+              <input data-sponsor-message value="${escapeAttribute(row.sponsorMessage || "")}" placeholder="留白時會自動產生感謝文字">
+            </label>
+            <div class="sponsor-media">
+              <div class="sponsor-preview" data-sponsor-preview>
+                ${sponsorImage ? `<img src="${escapeAttribute(sponsorImage)}" alt="贊助照片預覽">` : "尚未選擇照片"}
+              </div>
+              <div class="image-actions">
+                <button class="mini-btn" type="button" data-upload-image>選擇照片</button>
+                <button class="mini-btn" type="button" data-clear-image>移除照片</button>
+                <span class="image-note">可使用本人照片、品牌 Logo 或商品照片。</span>
+                <input data-sponsor-file type="file" accept="image/*" hidden>
+              </div>
+            </div>
+          </div>
+        </div>
         <button class="icon-btn" type="button" data-remove-row aria-label="移除">×</button>
       </div>`;
+    }
+
+    function updateSponsorPreview(row) {
+      const preview = row.querySelector("[data-sponsor-preview]");
+      const imageData = row.dataset.sponsorImage || "";
+      preview.innerHTML = imageData
+        ? `<img src="${escapeAttribute(imageData)}" alt="贊助照片預覽">`
+        : "尚未選擇照片";
+    }
+
+    function compressSponsorImage(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = () => {
+          const image = new Image();
+          image.onerror = reject;
+          image.onload = () => {
+            const maxSize = 420;
+            const scale = Math.min(1, maxSize / Math.max(image.width, image.height));
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.max(1, Math.round(image.width * scale));
+            canvas.height = Math.max(1, Math.round(image.height * scale));
+            const context = canvas.getContext("2d");
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(image, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL("image/webp", 0.78));
+          };
+          image.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
     }
 
     function saveConfigFromEditor() {
       state.config = [...elements.configEditor.querySelectorAll(".prize-row")].map(row => ({
         label: row.querySelector("[data-prize-label]").value.trim(),
-        quantity: Number(row.querySelector("[data-prize-quantity]").value)
+        quantity: Number(row.querySelector("[data-prize-quantity]").value),
+        sponsorName: row.querySelector("[data-sponsor-name]").value.trim(),
+        sponsorMessage: row.querySelector("[data-sponsor-message]").value.trim(),
+        sponsorImage: row.dataset.sponsorImage || ""
       })).filter(row => row.label && row.quantity > 0);
       saveState();
       showToast("設定已儲存。補新一輪寶箱後會套用新設定。");
